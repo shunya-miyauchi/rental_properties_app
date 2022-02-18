@@ -1,0 +1,44 @@
+<h2>物件<%= title %></h2>
+
+<%= form_with(model:@property,local:true) do |f| %>
+  <div>
+    <%= f.label :name,"物件名" %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :rent,"賃料" %><br>
+    <span><%= f.text_field :rent %>円</span>
+  </div>
+  <div>
+    <%= f.label :address,"住所" %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div>
+    <%= f.label :age,"築年数" %><br>
+    <span><%= f.text_field :age %>年</span>
+  </div>
+  <div>
+    <%= f.label :remarks,"備考" %><br>
+    <%= f.text_area :remarks %>
+  </div>
+  <hr>
+    <% n = 0 %>
+    <%= f.fields_for :nearest_stations do |s| %>
+      <h3>最寄駅<%= n += 1 %></h3>
+      <div>
+        <%= s.label :route_name,"路線名" %><br>
+        <%= s.text_field :route_name %>
+      </div>
+      <div>
+        <%= s.label :name,"駅名" %><br>
+        <%= s.text_field :name %>
+      </div>
+      <div>
+        <%= s.label :walking_minutes,"徒歩分数" %><br>
+        <span><%= s.text_field :walking_minutes %>分</span>
+      </div>
+    <% end %> 
+  <p><%= f.submit "#{title}する" %></p>
+<% end %>
+
+<%= link_to "戻る",properties_path %>
